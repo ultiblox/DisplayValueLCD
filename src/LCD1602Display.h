@@ -8,6 +8,9 @@ class LCD1602Display : public DisplayInterface {
 private:
     LiquidCrystal_I2C lcd;
     uint16_t numCols; // Number of columns of the display
+    String lastLabel = "";
+    String lastValue = "";
+
 public:
     LCD1602Display(uint8_t address, uint16_t cols, uint16_t rows);
     void init() override;
@@ -15,7 +18,6 @@ public:
     void setLabel(const String& label) override;
     void updateValue(const String& value) override;
 
-    // Declaration of the new method
     int calculateStartPosition(const String& text);
 };
 

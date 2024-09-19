@@ -18,7 +18,7 @@ fi
 for example in "$EXAMPLES_PATH"/*; do
     if [ -d "$example" ]; then
         echo "Compiling example: $example"
-        arduino-cli compile --fqbn $BOARD_TYPE "$example"
+        arduino-cli compile --fqbn $BOARD_TYPE --libraries "$LIBRARY_PATH" "$example"
         
         if [ $? -ne 0 ]; then
             echo "Error: Compilation failed for $example"

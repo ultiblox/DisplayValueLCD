@@ -2,11 +2,11 @@
 #define DisplayValueLCD_h
 
 #include "DisplayValueCommon.h"
-#include <LiquidCrystal_I2C.h>
+#include <LCDI2C.h>
 
 class DisplayValueLCD : public DisplayValueCommon {
 private:
-    LiquidCrystal_I2C lcd;
+    LCDI2C lcd;
     uint16_t numCols; // Number of columns of the display
     String lastLabel = "";
     String lastValue = "";

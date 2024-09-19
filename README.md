@@ -23,7 +23,7 @@ display.updateValue("25%");
 Refer to the `examples/hello-world/hello-world.ino` sketch for full usage.
 
 ## Dependencies
-- LiquidCrystal_I2C Library
+- LCDI2C Library
 - Arduino Core Library
 
 ## License

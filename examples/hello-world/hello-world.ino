@@ -1,6 +1,6 @@
-#include "LCD1602Display.h"
+#include "DisplayValueLCD.h"
 
-LCD1602Display display(0x27, 16, 2);
+DisplayValueLCD display(0x27, 16, 2);
 
 void setup() {
     display.init();

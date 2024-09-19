@@ -26,6 +26,10 @@ jobs:
         arduino-cli core update-index
         arduino-cli core install arduino:avr
 
+    - name: Run prepare script
+      run: |
+        bash prepare.sh
+
     - name: Run build script
       run: |
         bash build.sh

@@ -11,7 +11,7 @@ else
     echo "DisplayValueCommon library already exists, skipping clone."
 fi
 
-# Define the Arduino libraries folder
+# Define the Arduino libraries folder for LCDI2C
 LIBRARY_PATH2="$HOME/Arduino/libraries/LCDI2C"
 
 # Check if LCDI2C is already present
@@ -21,5 +21,17 @@ if [ ! -d "$LIBRARY_PATH2" ]; then
 else
     echo "LCDI2C library already exists, skipping clone."
 fi
+
+# Define the Arduino libraries folder for SerialLogger
+LIBRARY_PATH3="$HOME/Arduino/libraries/SerialLogger"
+
+# Check if SerialLogger is already present
+if [ ! -d "$LIBRARY_PATH3" ]; then
+    echo "Cloning SerialLogger library into Arduino libraries folder..."
+    git clone https://github.com/makers-multiverse/SerialLogger.git "$LIBRARY_PATH3"
+else
+    echo "SerialLogger library already exists, skipping clone."
+fi
+
 
 echo "Library preparation complete."

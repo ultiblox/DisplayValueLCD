@@ -37,29 +37,35 @@ void DisplayValueLCD::setLabel(const char* value) {
     }
 }
 
-void DisplayValueLCD::setValue(const char* value) {
-    if (value == nullptr) return;  // Check for null input
-    char fullValue[30];  // Adjusted buffer size for value and suffix
-
-    // Use snprintf for safer concatenation and null-termination
-    snprintf(fullValue, sizeof(fullValue), "%s%s", value, suffix);
-
-    // Only update if the value has changed
-    if (strcmp(lastValue, fullValue) != 0) {
-        // Clear the row first by printing 16 spaces (adjust to your LCD's width)
-        lcd.setCursor(0, 1);
-        lcd.print("                ");  // Assuming a 16-character wide LCD
-
-        // Copy the new value
-        strncpy(lastValue, fullValue, sizeof(lastValue) - 1);  // Safely copy to lastValue
-        lastValue[sizeof(lastValue) - 1] = '\0';  // Ensure null termination
-
-        // Set the cursor and print the new value
-        lcd.setCursor(calculateStartPosition(fullValue), 1);
-        lcd.print(fullValue);  // Display the combined value and suffix
-    }
+void DisplayValueLCD::setLabel(const __FlashStringHelper* value) {
+    char buffer[16];  // Adjust size as needed
+    strcpy_P(buffer, (PGM_P)value);
+    setLabel(buffer);  // Call the original setLabel with the converted string
 }
 
+void DisplayValueLCD::setValue(const char* value) {
+    if (value == nullptr) return;
+
+    //Logger.debug("Current suffix: ");
+    //Logger.debugln(suffix);  // Log the current suffix to check if it's being corrupted
+
+    char fullValue[17];  // Buffer size to fit the full display (16 characters + null terminator)
+    snprintf(fullValue, sizeof(fullValue), "%s%s", value, suffix);  // Safely concatenate value + suffix
+
+    //Logger.debug("Displaying value: ");
+    //Logger.debugln(fullValue);  // Log the current suffix to check if it's being corrupted
+
+    if (strcmp(lastValue, fullValue) != 0) {
+        lcd.setCursor(0, 1);
+        lcd.print("                ");  // Clear the row
+
+        strncpy(lastValue, fullValue, sizeof(lastValue) - 1);  // Copy the full value into lastValue
+        lastValue[sizeof(lastValue) - 1] = '\0';  // Ensure null-termination
+
+        lcd.setCursor(calculateStartPosition(fullValue), 1);  // Keep the centering intact
+        lcd.print(fullValue);  // Display the value + suffix
+    }
+}
 
 void DisplayValueLCD::setValue(int value) {
     char valueStr[8];  // Smaller buffer to conserve memory

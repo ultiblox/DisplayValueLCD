@@ -17,8 +17,8 @@ public:
     void init() override;
     void clear() override;
     void setLabel(const char* value) override;
+    void setLabel(const __FlashStringHelper* value) override;
     
-    // Properly override the pure virtual methods from DisplayValueCommon
     void setValue(const char* value) override;
     void setValue(int value) override;
     

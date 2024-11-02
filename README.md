@@ -26,5 +26,6 @@ Refer to the `examples/hello-world/hello-world.ino` sketch for full usage.
 - LCDI2C Library
 - Arduino Core Library
 
+
 ## License
-This library is open source, distributed under the MIT License.
+[This project is licensed under the UltiBlox License.](https://ultiblox.org/license)

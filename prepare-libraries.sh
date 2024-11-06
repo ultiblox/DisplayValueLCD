@@ -15,7 +15,6 @@ install_library() {
 }
 
 # Install required libraries
-install_library "DisplayValueCommon" "https://github.com/makers-multiverse/DisplayValueCommon.git"
 install_library "LCDI2C" "https://github.com/makers-multiverse/LCDI2C.git"
 install_library "SerialLogger" "https://github.com/makers-multiverse/SerialLogger.git"
 

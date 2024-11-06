@@ -1,4 +1,4 @@
-name: Build, Version, and Release
+name: Build, Test Consumers, and Release
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write  # Required for tagging and creating releases
 
 jobs:
-  build-and-release:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -39,8 +39,32 @@ jobs:
       run: |
         bash build.sh
 
+  build-consumers:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run Build Consumers Script
+      run: |
+        bash build-consumers.sh
+
+  release:
+    needs: [build, build-consumers]
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set Up Git User
+      run: |
+        git config --global user.name "${{ github.actor }}"
+        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
     - name: Run Version Increment Script (Only if Build Succeeds)
-      if: ${{ success() }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
@@ -48,7 +72,6 @@ jobs:
         bash version-increment.sh
 
     - name: Create GitHub Release
-      if: ${{ success() }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |

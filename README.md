@@ -25,8 +25,8 @@ The `DisplayValueLCD` library is compatible with [`DisplayValueOLED`](https://gi
 
 1. Open the **Arduino IDE**.
 2. Go to **Tools > Manage Libraries**.
-3. Search for **UltiBlox DisplayValueLCD** and click **Install**.
-4. Access example sketches under **File > Examples > UltiBlox DisplayValueLCD**.
+3. Search for **UltiBlox-DisplayValueLCD** and click **Install**.
+4. Access example sketches under **File > Examples > UltiBlox-DisplayValueLCD**.
 
 ### Option 2: Manual Installation (for Development and Customization)
 

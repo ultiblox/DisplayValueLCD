@@ -10,7 +10,6 @@ permissions:
 
 jobs:
   test-install:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:
@@ -30,7 +29,6 @@ jobs:
         bash build.sh
 
   test-install-symlink:
-    needs: build
     runs-on: ubuntu-latest
 
     steps:

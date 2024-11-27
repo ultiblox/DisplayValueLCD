@@ -16,21 +16,6 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Set Up Git User
-      run: |
-        git config --global user.name "${{ github.actor }}"
-        git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-
-    - name: Install Arduino CLI
-      run: |
-        curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
-        sudo mv bin/arduino-cli /usr/local/bin/
-
-    - name: Install Arduino AVR Core
-      run: |
-        arduino-cli core update-index
-        arduino-cli core install arduino:avr
-
     - name: Run Prepare Script
       run: |
         bash prepare.sh
@@ -39,8 +24,48 @@ jobs:
       run: |
         bash build.sh
 
-  build-consumers:
+  test-install:
     needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run Prepare Script
+      run: |
+        bash prepare.sh
+
+    - name: Run Install Script
+      run: |
+        bash install.sh
+
+    - name: Verify Build
+      run: |
+        bash build.sh
+
+  test-install-symlink:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Run Prepare Script
+      run: |
+        bash prepare.sh
+
+    - name: Run Install Symlink Script
+      run: |
+        bash install-symlink.sh
+
+    - name: Verify Build
+      run: |
+        bash build.sh
+
+  build-consumers:
+    needs: [test-install, test-install-symlink]
     runs-on: ubuntu-latest
 
     steps:
@@ -52,7 +77,7 @@ jobs:
         bash build-consumers.sh
 
   release:
-    needs: [build, build-consumers]
+    needs: [build-consumers]
     runs-on: ubuntu-latest
 
     steps:

@@ -49,6 +49,8 @@ while IFS=',' read -r DEP_NAME GIT_URL || [ -n "$DEP_NAME" ]; do
       echo "Error: Failed to prepare ${DEP_NAME}. Skipping."
       continue
     }
+  else
+    echo "No prepare.sh found for ${DEP_NAME}. Skipping preparation."
   fi
 done < "${DEPENDENCIES_FILE}"
 

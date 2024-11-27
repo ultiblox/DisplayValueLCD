@@ -1,2 +1,3 @@
 LCDI2C,https://github.com/ultiblox/LCDI2C.git
+SerialLogger,https://github.com/ultiblox/SerialLogger.git
 

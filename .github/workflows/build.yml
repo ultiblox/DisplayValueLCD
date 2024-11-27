@@ -20,6 +20,10 @@ jobs:
       run: |
         bash prepare.sh
 
+    - name: Create Arduino Libraries Directory
+      run: |
+        mkdir -p ~/Arduino/libraries
+        
     - name: Run Install Script
       run: |
         bash install.sh
@@ -38,6 +42,10 @@ jobs:
     - name: Run Prepare Script
       run: |
         bash prepare.sh
+
+    - name: Create Arduino Libraries Directory
+      run: |
+        mkdir -p ~/Arduino/libraries
 
     - name: Run Install Symlink Script
       run: |

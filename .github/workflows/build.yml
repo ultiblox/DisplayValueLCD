@@ -9,21 +9,6 @@ permissions:
   contents: write  # Required for tagging and creating releases
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
-    - name: Run Prepare Script
-      run: |
-        bash prepare.sh
-
-    - name: Run Build Script
-      run: |
-        bash build.sh
-
   test-install:
     needs: build
     runs-on: ubuntu-latest

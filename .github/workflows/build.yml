@@ -63,6 +63,18 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Run Prepare Script
+      run: |
+        bash prepare.sh
+
+    - name: Create Arduino Libraries Directory
+      run: |
+        mkdir -p ~/Arduino/libraries
+
+    - name: Run Install Script
+      run: |
+        bash install.sh
+        
     - name: Run Build Consumers Script
       run: |
         bash build-consumers.sh
